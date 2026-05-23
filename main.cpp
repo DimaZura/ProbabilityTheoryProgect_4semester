@@ -10,8 +10,8 @@ int main() {
     // TODO ERROR в методичке есть ошибка - Таблица 1 последняя строка, там должно быть Pj
 
 
-    Task1Handler::Run();
-    // Task2Handler::Run();
+    // Task1Handler::Run();
+    Task2Handler::Run();
 
     return 0;
 }

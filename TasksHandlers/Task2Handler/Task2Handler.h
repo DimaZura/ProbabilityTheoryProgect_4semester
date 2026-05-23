@@ -17,7 +17,7 @@ public:
 
 protected:
 
-    static  constexpr bool Debug = false;
+    static  constexpr bool Debug = true;
 
     //
     //  Данные математического ожидания и дисперсии
@@ -35,7 +35,7 @@ protected:
     //  Выполнение задания
     //
 
-    static void Process(int SelectionSize);
+    static void Process(int SelectionSize, double Alpha);
 
     // Вычисление критерия согласия х2 Пирсона
     static double CalculatePearsonTest(std::vector<double> Selection, int n, double p);

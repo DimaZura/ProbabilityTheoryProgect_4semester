@@ -86,7 +86,7 @@ void XLSView::SaveMxDxTable(AnalyticsMxDxResult MxDxResult, int taskNum) {
         worksheet_write_number(worksheet, current_row, 3, test, data_format);
 
         // --- Заполнение столбца дисперсии ---
-        worksheet_write_number(worksheet, current_row, 5, Mx, data_format);
+        worksheet_write_number(worksheet, current_row, 5, Dx, data_format);
 
         // --- Заполнение столбца оценки дисперсии ---
         test = std::abs(Dx - ThDx)/ThDx;

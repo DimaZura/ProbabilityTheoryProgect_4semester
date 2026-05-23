@@ -21,11 +21,11 @@ AnalyticsTestsResult Task2Handler::PearsonTests;
 
 
 void Task2Handler::Run() {
-    Process(25);
-    Process(100);
-    Process(500);
-    Process(1000);
-    Process(10000000);
+    Process(25, 0.01);
+    Process(100, 0.05);
+    Process(500, 0.1);
+    Process(1000,0.2);
+    Process(10000000,0.4);
 
     // сохранение таблицы расчетных данных
     XLSView::SaveMxDxTable(AnalyticsMxDxResult, 2);
@@ -35,7 +35,7 @@ void Task2Handler::Run() {
 
 }
 
-void Task2Handler::Process(int SelectionSize) {
+void Task2Handler::Process(int SelectionSize, double Alpha) {
 
     //
     //  Начальные параметры
@@ -94,6 +94,18 @@ void Task2Handler::Process(int SelectionSize) {
     //  Вычисление оценки χ2 Пирсона
     //
 
+    // --- определение критического значения критерия ---
+
+    std::map<double, double> AlphaToHiCrit {
+                {0.01, 15.09},
+                {0.05, 11.07},
+                {0.1, 9.24},
+                {0.2, 7.29},
+                {0.4, 5.35}
+    };
+    double HiCritical = AlphaToHiCrit.at(Alpha);
+
+    // вычисление критерия
     double TestValue = CalculatePearsonTest(Selection, n, p);
     if (Debug) {
         std::cout << "Pearson Test: " << TestValue << std::endl;
@@ -102,7 +114,7 @@ void Task2Handler::Process(int SelectionSize) {
 
     // сохранение
 
-    TestResult TestResult(TestValue, 0.0, 0.0);
+    TestResult TestResult(TestValue, HiCritical, Alpha);
     PearsonTests.TestsResults.insert({SelectionSize, TestResult});
 
 }
@@ -114,15 +126,13 @@ double Task2Handler::CalculatePearsonTest(std::vector<double> Selection, int n, 
     //  Функции распределения
     //
 
-    // эмпирическая
+    // ЭФР
     std::vector<double> Empirical = Converter::ToEDF(Selection, 0, 8, Selection.size());
-    // теоретическая
+    // ТФР
     std::vector<double> Theory = Math::TheoryEDFBinomialDistribution(n, p);
 
     //
-    //  Перевод в векторы содержащие
-    //  число элеменов на нектором числе сегментов
-    //  (дельты соседних значения вероятностей эмпирической или же теоретической ФР умноженные на размер выборки)
+    //  Разбиение на сегменты с количеством элементов
     //
 
     size_t empSize = Empirical.size();
@@ -131,26 +141,40 @@ double Task2Handler::CalculatePearsonTest(std::vector<double> Selection, int n, 
     std::vector<int> NEmpirical(empSize);
     std::vector<int> NTheory(thSize);
 
-    NEmpirical[0] = double(Empirical[0])*Selection.size();
+    NEmpirical[0] = std::round((Empirical[0])*Selection.size());
     for (int i = 1; i < empSize; i++) {
-        NEmpirical[i] = double(Empirical[i]-Empirical[i-1])*Selection.size();
+        NEmpirical[i] = std::round((Empirical[i]-Empirical[i-1])*Selection.size());
     }
 
-    NTheory[0] = double(Theory[0])*Selection.size();
+    NTheory[0] = std::round((Theory[0])*Selection.size());
     for (int i = 1; i < thSize; i++) {
-        NTheory[i] = double(Theory[i]-Theory[i-1])*Selection.size();
+        NTheory[i] = std::round((Theory[i]-Theory[i-1])*Selection.size());
     }
 
-    // поиск сегметов содержащих 0 элементов и склейка их с ненудевыми
+    if (Debug) {
+        std:: cout << "До склейки" << std::endl;
+        for (auto val : NEmpirical) {
+            std:: cout << val << " ";
+        }
+        std:: cout << std::endl;
+        for (auto val : NTheory) {
+            std:: cout << val << " ";
+        }
+        std:: cout << std::endl;
+    }
+
+    // поиск сегментов содержащих 0 элементов и склейка их с ненулевыми
     // пример склейки двух разбиений
     // [0, 1, 5, 10, 3, 1, 0]    --->    [6, 10, 3, 1]
     // [0, 0, 2, 8, 19, 6, 1]    --->    [2, 8, 19, 7]
     //  склеены первые три сегмента  и последние два
     //
-    // (необходимо для корректрной работы алгоритма вычисления оценки, чтобе не допускать деление на ноль)
+    // (необходимо для корректной работы алгоритма вычисления оценки, чтобы не допускать деление на ноль)
     Math::DivideIntoNonZeroSegments(NEmpirical, NTheory);
 
     if (Debug) {
+        std:: cout << "После склейки" << std::endl;
+
         for (auto val : NEmpirical) {
             std:: cout << val << " ";
         }
@@ -162,17 +186,13 @@ double Task2Handler::CalculatePearsonTest(std::vector<double> Selection, int n, 
     }
 
 
-    //
-    //  Вычисление: X^2 = Sum[i=0; i<n]((NEmp(i) - NTh(i))^2/NTh(i))
-    //          NTh -   теоретическое число элементов попавших в i-й сегмент
-    //          NEmp -  практическое число элементов попавших в i-й сегмент
-    //
+    // ![оценка хи2 Пирсона](../../Images/Comments/10.png)
 
     double result = 0;
     size_t nThSize = NTheory.size();
 
     for (int i = 0; i < nThSize; i++) {
-        result += (double(NTheory[i]) - double(NEmpirical[i]))*(NTheory[i] - NEmpirical[i])/NTheory[i];
+        result += double((NTheory[i]) - (NEmpirical[i]))*(NTheory[i] - NEmpirical[i])/NTheory[i];
     }
 
 
