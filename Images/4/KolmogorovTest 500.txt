@@ -1,0 +1,2 @@
+Test = 0.588299
+CriticalValue = 0.890000
