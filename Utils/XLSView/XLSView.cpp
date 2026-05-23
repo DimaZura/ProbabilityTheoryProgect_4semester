@@ -14,7 +14,15 @@
 
 
 // Сохранение таблицы мат ожидания и дисперсии
-void XLSView::SaveMxDxTable(const double ThMx, const double ThDx, const std::map<int, double> Mxs, const std::map<int, double> Dxs, int taskNum) {
+void XLSView::SaveMxDxTable(AnalyticsMxDxResult MxDxResult, int taskNum) {
+
+    //
+    //  Параметры
+    //
+
+    int ResultSize = MxDxResult.Emp.size();
+    double ThMx = MxDxResult.Th.Mx;
+    double ThDx = MxDxResult.Th.Dx;
 
     //
     // Создание объекта таблицы
@@ -52,38 +60,36 @@ void XLSView::SaveMxDxTable(const double ThMx, const double ThDx, const std::map
 
     std::string str_ThMx = std::to_string(ThMx); // Сохраняем объект строки
     const char* char_ptr_ThMx = str_ThMx.c_str(); // Теперь этот char* будет валиден
-    worksheet_merge_range(worksheet, 3, 1, 3 + Mxs.size() - 1, 1, char_ptr_ThMx, str_format);
+    worksheet_merge_range(worksheet, 3, 1, 3 + ResultSize - 1, 1, char_ptr_ThMx, str_format);
 
     std::string str_ThDx = std::to_string(ThDx); // Сохраняем объект строки
     const char* char_ptr_ThDx = str_ThDx.c_str(); // Теперь этот char* будет валиден
-    worksheet_merge_range(worksheet, 3, 4, 3 + Mxs.size() - 1, 4, char_ptr_ThDx, str_format);
+    worksheet_merge_range(worksheet, 3, 4, 3 + ResultSize - 1, 4, char_ptr_ThDx, str_format);
 
     //
     //  Заполнение данных
     //
 
     int current_row = 3;
-    for (auto pair : Mxs) {
+    for (auto pair : MxDxResult.Emp) {
         // --- Заполнение столбца объема выборки ---
         worksheet_write_number(worksheet, current_row, 0, pair.first, data_format);
 
+        double Mx = pair.second.Mx;
+        double Dx = pair.second.Dx;
+
         // --- Заполнение столбца мат ожидания ---
-        worksheet_write_number(worksheet, current_row, 2, pair.second, data_format);
+        worksheet_write_number(worksheet, current_row, 2, Mx, data_format);
 
         // --- Заполнение столбца оценки мат ожидания ---
-        double test = std::abs(pair.second - ThMx)/ThMx;
+        double test = std::abs(Mx - ThMx)/ThMx;
         worksheet_write_number(worksheet, current_row, 3, test, data_format);
 
-        current_row++;
-    }
-
-    current_row = 3;
-    for (auto pair : Dxs) {
         // --- Заполнение столбца дисперсии ---
-        worksheet_write_number(worksheet, current_row, 5, pair.second, data_format);
+        worksheet_write_number(worksheet, current_row, 5, Mx, data_format);
 
         // --- Заполнение столбца оценки дисперсии ---
-        double test = std::abs(pair.second - ThDx)/ThDx;
+        test = std::abs(Dx - ThDx)/ThDx;
         worksheet_write_number(worksheet, current_row, 6, test, data_format);
 
         current_row++;
@@ -183,6 +189,36 @@ void XLSView::SaveStatisticalSeriesForDiscrete(std::vector<double> EDF, int min,
         p = (EDF[i]-EDF[i-1]);
         worksheet_write_number(worksheet, 2, i, p, nullptr);
     }
+
+    workbook_close(workbook);
+}
+
+void XLSView::SaveTestResult(AnalyticsTestsResult Result, int taskNum) {
+
+    //
+    // Создание объекта таблицы
+    //
+
+    std::string FileName = "../Images/" + std::to_string(taskNum) + "/TestAnalytics.xlsx";
+    lxw_workbook  *workbook  = workbook_new(FileName.c_str());
+    lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
+
+    worksheet_write_string(worksheet, 0, 0, "Размер выборки", nullptr);
+    worksheet_write_string(worksheet, 0, 1, "Полученная оценка", nullptr);
+    worksheet_write_string(worksheet, 0, 2, "Критическое значение", nullptr);
+    worksheet_write_string(worksheet, 0, 3, "Значение альфа", nullptr);
+
+
+    int i = 1;
+    for (auto pair : Result.TestsResults) {
+        auto Test = pair.second;
+        worksheet_write_number(worksheet, i, 0, pair.first, nullptr);
+        worksheet_write_number(worksheet, i, 1, Test.TestValue, nullptr);
+        worksheet_write_number(worksheet, i, 2, Test.CriticalValue, nullptr);
+        worksheet_write_number(worksheet, i, 3, Test.Alpha, nullptr);
+        i++;
+    }
+
 
     workbook_close(workbook);
 }

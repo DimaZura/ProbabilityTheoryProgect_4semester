@@ -6,6 +6,8 @@
 #define PROJECT_TASK1HANDLER_H
 #include <map>
 
+#include "../../Models/Models.h"
+
 
 class Task1Handler {
 
@@ -15,21 +17,29 @@ public:
 
 protected:
 
+    static  constexpr bool Debug = false;
+
     //
     //  Данные математического ожидания и дисперсии
     //
 
-    static double ThMx;
-    static double ThDx;
+    static AnalyticsMxDxResult AnalyticsMxDxResult;
 
-    static std::map<int, double> Mxs;
-    static std::map<int, double> Dxs;
+    //
+    //  Данные оценок
+    //
+
+    static AnalyticsTestsResult KolmogorovTests;
+
 
     //
     //  Выполнение задания
     //
 
-    static void Process(int SelectionSize);
+    static void Process(int SelectionSize, double Alpha);
+
+    // Вычисление критерия согласия Колмагорова-Смирнова
+    static double CalculateKolmogorovTest(std::vector<double> Selection, int min, int max);
 
 };
 

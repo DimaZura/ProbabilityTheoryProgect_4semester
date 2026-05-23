@@ -9,11 +9,8 @@ int main() {
 
     // TODO ERROR в методичке есть ошибка - Таблица 1 последняя строка, там должно быть Pj
 
-    // TODO переделать таблицу распределения для дискретных величин
     Task1Handler::Run();
-    Task2Handler::Run();
-    Task3Handler::Run();
-    Task4Handler::Run();
+    // Task2Handler::Run();
 
     return 0;
 }

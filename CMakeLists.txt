@@ -38,7 +38,9 @@ add_executable(Project main.cpp
         Utils/Converter/Converter.cpp
         Utils/Converter/Converter.h
         Utils/XLSView/XLSView.cpp
-        Utils/XLSView/XLSView.h)
+        Utils/XLSView/XLSView.h
+        Models/Models.h
+        Models/Models.cpp)
 
 # Ищем библиотеку libxlsxwriter для работы с экселем
 find_library(XLSXWRITER_LIB xlsxwriter REQUIRED)

@@ -1,2 +1,0 @@
-Test = 0.597089
-CriticalValue = 1.070000

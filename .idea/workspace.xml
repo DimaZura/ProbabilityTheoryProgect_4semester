@@ -29,7 +29,69 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="71857c47-76f6-4ee0-a4a1-7c82a2aa0e8b" name="Changes" comment="" />
+    <list default="true" id="71857c47-76f6-4ee0-a4a1-7c82a2aa0e8b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Models/Models.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Models/Models.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/0/100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/0/1000.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/0/25.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/0/500.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/1/10000000EDF.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/1/10000000EDF.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/1/10000000Hist.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/1/10000000Hist.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/1/10000000StatisticalSeries.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Images/1/10000000StatisticalSeries.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/1/10000EDF.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/1/10000Hist.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/1/1000EDF.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/1/1000EDF.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/1/1000Hist.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/1/1000Hist.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/1/1000StatisticalSeries.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Images/1/1000StatisticalSeries.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/1/100EDF.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/1/100EDF.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/1/100Hist.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/1/100Hist.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/1/100StatisticalSeries.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Images/1/100StatisticalSeries.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/1/25EDF.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/1/25EDF.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/1/25Hist.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/1/25Hist.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/1/25StatisticalSeries.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Images/1/25StatisticalSeries.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/1/500EDF.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/1/500EDF.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/1/500Hist.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/1/500Hist.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/1/500StatisticalSeries.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Images/1/500StatisticalSeries.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/1/Analytics.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Images/1/Analytics.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/1/MxDx 1000000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/2/10000000EmpiricalDistribution.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/2/10000000EmpiricalDistribution.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/2/10000000Polygon.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/2/10000000Polygon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/2/10000000StatisticalSeries.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Images/2/10000000StatisticalSeries.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/2/100000EmpiricalDistribution.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/2/100000Polygon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/2/1000EmpiricalDistribution.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/2/1000EmpiricalDistribution.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/2/1000Polygon.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/2/1000Polygon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/2/1000StatisticalSeries.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Images/2/1000StatisticalSeries.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/2/100EmpiricalDistribution.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/2/100EmpiricalDistribution.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/2/100Polygon.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/2/100Polygon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/2/100StatisticalSeries.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Images/2/100StatisticalSeries.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/2/25EmpiricalDistribution.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/2/25EmpiricalDistribution.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/2/25Polygon.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/2/25Polygon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/2/25StatisticalSeries.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Images/2/25StatisticalSeries.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/2/500EmpiricalDistribution.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/2/500EmpiricalDistribution.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/2/500Polygon.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/2/500Polygon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/2/500StatisticalSeries.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Images/2/500StatisticalSeries.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/2/Analytics.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Images/2/Analytics.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/2/Снимок экрана 2026-05-22 в 16.49.06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/3/PearsonTest 100.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/3/PearsonTest 1000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/3/PearsonTest 25.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/3/PearsonTest 500.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/4/KolmogorovTest 100.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/4/KolmogorovTest 1000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/4/KolmogorovTest 25.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/4/KolmogorovTest 500.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TasksHandlers/Task1Handler/Task1Handler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TasksHandlers/Task1Handler/Task1Handler.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TasksHandlers/Task1Handler/Task1Handler.h" beforeDir="false" afterPath="$PROJECT_DIR$/TasksHandlers/Task1Handler/Task1Handler.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TasksHandlers/Task2Handler/Task2Handler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TasksHandlers/Task2Handler/Task2Handler.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TasksHandlers/Task2Handler/Task2Handler.h" beforeDir="false" afterPath="$PROJECT_DIR$/TasksHandlers/Task2Handler/Task2Handler.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/XLSView/XLSView.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/XLSView/XLSView.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/XLSView/XLSView.h" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/XLSView/XLSView.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -122,6 +184,11 @@
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.Project">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Project" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="Project" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="Project">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -163,7 +230,7 @@
       <workItem from="1779394861924" duration="3328000" />
       <workItem from="1779445553932" duration="9873000" />
       <workItem from="1779460436382" duration="895000" />
-      <workItem from="1779532113836" duration="481000" />
+      <workItem from="1779532113836" duration="5345000" />
     </task>
     <servers />
   </component>

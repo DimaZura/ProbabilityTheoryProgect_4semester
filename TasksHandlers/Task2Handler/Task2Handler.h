@@ -6,6 +6,8 @@
 #define PROJECT_TASK2HANDLER_H
 #include <map>
 
+#include "../../Models/Models.h"
+
 
 class Task2Handler {
 
@@ -15,21 +17,28 @@ public:
 
 protected:
 
+    static  constexpr bool Debug = false;
+
     //
     //  Данные математического ожидания и дисперсии
     //
 
-    static double ThMx;
-    static double ThDx;
+    static AnalyticsMxDxResult AnalyticsMxDxResult;
 
-    static std::map<int, double> Mxs;
-    static std::map<int, double> Dxs;
+    //
+    //  Данные оценок
+    //
+
+    static AnalyticsTestsResult PearsonTests;
 
     //
     //  Выполнение задания
     //
 
     static void Process(int SelectionSize);
+
+    // Вычисление критерия согласия х2 Пирсона
+    static double CalculatePearsonTest(std::vector<double> Selection, int n, double p);
 
 };
 
