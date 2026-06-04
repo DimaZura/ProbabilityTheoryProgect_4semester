@@ -17,24 +17,43 @@ void View::SaveHist(const std::vector<double>& Selection, int min, int max, int 
 
     std::string fDir = "../Images/" + std::to_string(taskNum) + "/" + fileName + ".png";
 
-    double step = double(max-min)/CountSegments;
+    // 1. Подготовка данных для гистограммы
+    double step = static_cast<double>(max - min) / CountSegments;
     std::vector<double> edges;
-    for (int i = 0; i < CountSegments+1; ++i) {
-        double x_val = min + i * step;
-        edges.push_back(x_val);
+    for (int i = 0; i <= CountSegments; ++i) {
+        edges.push_back(min + i * step);
     }
 
-    cla();
-    hist(Selection, edges);
+    cla(); // Очистить текущие оси
+
+    // 2. Построение гистограммы с нормализацией PDF
+    // h[i] = count[i] / (total_count * bin_width)
+    auto h = hist(Selection, edges);
+    h->normalization(histogram::normalization::pdf);
+    h->edge_color({0, 0.5, 0.5, 0.6}); // Цвет столбцов (с небольшой прозрачностью)
+
+    hold(on); // Удерживаем график для наложения линии
+
+    // 3. Теоретическая линия для равномерного распределения
+    // Плотность f(x) = 1 / (b - a) на отрезке [min, max]
+    double theoretical_y = 1.0 / (max - min);
+    std::vector<double> x_line = { (double)min, (double)max };
+    std::vector<double> y_line = { theoretical_y, theoretical_y };
+
+    auto l = plot(x_line, y_line, "r-"); // Красная сплошная линия
+    l->line_width(3);
 
     // --- Оформление ---
-    std::string strTitle = "Равномерное распределение: Гистограмма распределения " + std::to_string(Selection.size()) + " эл-ов";
+    std::string strTitle = "Равномерное распределение: Гистограмма плотности (" + std::to_string(Selection.size()) + " эл-ов)";
     title(strTitle);
-    xlabel("");
-    ylabel("");
-    xlim({double(min), double(max)});
+    xlabel("Значение");
+    ylabel("Плотность h[i]");
+    xlim({double(min), double(max)}); // Немного расширим границы для красоты
+    ylim({0.0, 0.5});
 
     save(fDir);
+    hold(off); // Снимаем режим удержания
+
 }
 
 void View::SavePolygon(const std::vector<double> &Selection, int taskNum, const std::string &fileName) {
@@ -42,30 +61,74 @@ void View::SavePolygon(const std::vector<double> &Selection, int taskNum, const 
 
     std::string fDir = "../Images/" + std::to_string(taskNum) + "/" + fileName + ".png";
 
-    std::vector<double> Values(9);
-    std::vector<double> x_val;
-
-    for (int val : Selection) {
-        Values[val] ++;
+    // Подсчет эмпирических частот
+    std::vector<double> Values(9, 0.0);
+    for (double val : Selection) { // Изменил int на double для безопасности
+        int idx = static_cast<int>(val);
+        if (idx >= 0 && idx < Values.size()) {
+            Values[idx]++;
+        }
     }
 
+    std::vector<double> x_val;
     for (int i = 0; i < Values.size(); ++i) {
         x_val.push_back(i);
     }
 
+    double totalElements = Selection.size();
 
     cla();
-    stem(x_val, Values);
 
-    // --- Оформление ---
-    std::string strTitle = "Биномиальное распределение: Полигон распределения " + std::to_string(Selection.size()) + " эл-ов";
+    // 1. Рисуем эмпирический полигон (вертикальные линии с маркерами)
+    auto s = stem(x_val, Values);
+    s->color({0, 0, 0, 0.5}); // Синий цвет для эмпирики
+    s->marker_style(line_spec::marker_style::circle);
+
+    hold(on);
+    grid(on);
+
+    // --- ДОБАВЛЕНИЕ ТЕОРЕТИЧЕСКОЙ ЛИНИИ ---
+
+    // Предположим, n = размер_вектора - 1, а p нужно знать (например, 0.5 или рассчитать)
+    // Здесь вам нужно подставить ваши параметры n и p
+
+    // Получаем теоретические вероятности
+    std::vector<double> theoreticalEDF = Math::TheoryEDFBinomialDistribution(8, 0.3);
+    std::vector<double> theoreticalProbs;
+
+    theoreticalProbs.push_back(theoreticalEDF[0]);
+    for (int i = 1; i<theoreticalEDF.size(); i++) {
+        theoreticalProbs.push_back(theoreticalEDF[i] - theoreticalEDF[i-1]);
+    }
+
+    // Масштабируем вероятности в количество элементов, чтобы шкалы совпали
+    std::vector<double> theoreticalCounts;
+    for (double p_val : theoreticalProbs) {
+        theoreticalCounts.push_back(p_val * totalElements);
+    }
+
+    // Рисуем теоретическую линию (красная пунктирная с квадратами)
+    auto l = plot(x_val, theoreticalCounts, "r--s");
+    l->line_width(1);
+    l->marker_size(4);
+    l->marker_color("red");
+    l->marker_face_color("red");
+
+    // ---------------------------------------
+
+
+    // Настройка осей и заголовка
+    double maxY = std::max(max(Values), max(theoreticalCounts));
+    ylim({0, maxY * 1.2});
+
+    std::string strTitle = "Биномиальное распределение: Полигон (" + std::to_string(Selection.size()) + " эл-ов)";
     title(strTitle);
-    xlabel("");
-    ylabel("");
+    xlabel("Количество успехов");
+    ylabel("Частота (количество)");
 
 
     save(fDir);
-
+    hold(off);
 }
 
 

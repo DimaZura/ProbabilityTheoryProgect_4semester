@@ -31,7 +31,7 @@ void Task1Handler::Run() {
     Process(100, 0.2);
     Process(500, 0.3);
     Process(1000, 0.4);
-    Process(10000000, 0.5);
+    // Process(10000000, 0.5);
 
     // сохранение таблицы расчетных данных
     XLSView::SaveMxDxTable(AnalyticsMxDxResult, 1);
